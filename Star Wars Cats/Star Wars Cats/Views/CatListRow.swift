@@ -4,40 +4,29 @@
 //
 //  Created by Brandon Jemison on 12/19/21.
 //
-
+import SDWebImageSwiftUI
 import SwiftUI
 
 struct CatListRow: View {
     
-    @State var cat: Cat?
-    @Binding var isGrayscaledEnabled: Bool
-    @State var grayscaleImage = "https://picsum.photos/200/300?grayscale"
+    @State  var cat: CatViewModel
+ 
     
     var body: some View {
-        
-        AsyncImage(
-            url: URL(string: (isGrayscaledEnabled ? grayscaleImage : cat?.image)!),
-            transaction: Transaction(animation: .easeInOut)
-        ) { phase in
-            switch phase {
-            case .empty:
+        WebImage(url: URL(string: cat.image))
+            .resizable()
+            .placeholder {
                 ProgressView()
-            case .success(let image):
-                image
-                    .resizable()
-                    .transition(.scale(scale: 0.1, anchor: .center))
-            case .failure:
-                Image(systemName: "wifi.slash")
-            @unknown default:
-                EmptyView()
             }
-        }
+            .scaledToFit()
+            .modifier(ImageModifier(width: 70, height: 70))
     }
 }
 
 struct CatListRow_Previews: PreviewProvider {
     @State static var bool: Bool = false
+    @State static var cat: CatViewModel = CatViewModel(cat: Cat(name: "", height: "", mass: "", hairColor: "", skinColor: "", eyeColor: "", birthYear: "", gender: "", image: ""))
     static var previews: some View {
-        CatListRow(isGrayscaledEnabled: $bool)
+        CatListRow(cat: cat)
     }
 }

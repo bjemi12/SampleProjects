@@ -11,10 +11,12 @@
 		D42BD5E9276F918F0069E26C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42BD5E8276F918F0069E26C /* ContentView.swift */; };
 		D42BD5EB276F91940069E26C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D42BD5EA276F91940069E26C /* Assets.xcassets */; };
 		D42BD5EE276F91940069E26C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D42BD5ED276F91940069E26C /* Preview Assets.xcassets */; };
-		D42BD5F5276F91D00069E26C /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42BD5F4276F91D00069E26C /* Network.swift */; };
 		D42BD5F7276F93B30069E26C /* Cat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42BD5F6276F93B30069E26C /* Cat.swift */; };
 		D42BD5F9276F9A190069E26C /* CatListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42BD5F8276F9A190069E26C /* CatListRow.swift */; };
 		D42BD5FB276FA9C30069E26C /* CatDetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42BD5FA276FA9C30069E26C /* CatDetailedView.swift */; };
+		D4A4FD562778CB8100B65873 /* CatsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A4FD552778CB8100B65873 /* CatsListViewModel.swift */; };
+		D4A4FD5F27793EB500B65873 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D4A4FD5E27793EB500B65873 /* SDWebImageSwiftUI */; };
+		D4B8204D27768CAB003DCDAA /* CatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B8204C27768CAB003DCDAA /* CatViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,10 +25,11 @@
 		D42BD5E8276F918F0069E26C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D42BD5EA276F91940069E26C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D42BD5ED276F91940069E26C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D42BD5F4276F91D00069E26C /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		D42BD5F6276F93B30069E26C /* Cat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cat.swift; sourceTree = "<group>"; };
 		D42BD5F8276F9A190069E26C /* CatListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatListRow.swift; sourceTree = "<group>"; };
 		D42BD5FA276FA9C30069E26C /* CatDetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatDetailedView.swift; sourceTree = "<group>"; };
+		D4A4FD552778CB8100B65873 /* CatsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsListViewModel.swift; sourceTree = "<group>"; };
+		D4B8204C27768CAB003DCDAA /* CatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4A4FD5F27793EB500B65873 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +48,8 @@
 			isa = PBXGroup;
 			children = (
 				D42BD5F6276F93B30069E26C /* Cat.swift */,
+				D4B8204C27768CAB003DCDAA /* CatViewModel.swift */,
+				D4A4FD552778CB8100B65873 /* CatsListViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -65,15 +71,6 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		D413EC50277269E300C1A1AB /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				D42BD5E6276F918F0069E26C /* Star_Wars_CatsApp.swift */,
-				D42BD5F4276F91D00069E26C /* Network.swift */,
-			);
-			path = Managers;
-			sourceTree = "<group>";
-		};
 		D42BD5DA276F918F0069E26C = {
 			isa = PBXGroup;
 			children = (
@@ -93,7 +90,7 @@
 		D42BD5E5276F918F0069E26C /* Star Wars Cats */ = {
 			isa = PBXGroup;
 			children = (
-				D413EC50277269E300C1A1AB /* Managers */,
+				D42BD5E6276F918F0069E26C /* Star_Wars_CatsApp.swift */,
 				D413EC4D2772693900C1A1AB /* Model */,
 				D413EC4E2772695F00C1A1AB /* Views */,
 				D413EC4F2772697A00C1A1AB /* Controllers */,
@@ -127,6 +124,9 @@
 			dependencies = (
 			);
 			name = "Star Wars Cats";
+			packageProductDependencies = (
+				D4A4FD5E27793EB500B65873 /* SDWebImageSwiftUI */,
+			);
 			productName = "Star Wars Cats";
 			productReference = D42BD5E3276F918F0069E26C /* Star Wars Cats.app */;
 			productType = "com.apple.product-type.application";
@@ -155,6 +155,9 @@
 				Base,
 			);
 			mainGroup = D42BD5DA276F918F0069E26C;
+			packageReferences = (
+				D4A4FD5D27793EB500B65873 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			productRefGroup = D42BD5E4276F918F0069E26C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -182,11 +185,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D42BD5F7276F93B30069E26C /* Cat.swift in Sources */,
+				D4B8204D27768CAB003DCDAA /* CatViewModel.swift in Sources */,
 				D42BD5E9276F918F0069E26C /* ContentView.swift in Sources */,
 				D42BD5F9276F9A190069E26C /* CatListRow.swift in Sources */,
 				D42BD5FB276FA9C30069E26C /* CatDetailedView.swift in Sources */,
+				D4A4FD562778CB8100B65873 /* CatsListViewModel.swift in Sources */,
 				D42BD5E7276F918F0069E26C /* Star_Wars_CatsApp.swift in Sources */,
-				D42BD5F5276F91D00069E26C /* Network.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +393,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D4A4FD5D27793EB500B65873 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D4A4FD5E27793EB500B65873 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4A4FD5D27793EB500B65873 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D42BD5DB276F918F0069E26C /* Project object */;
 }

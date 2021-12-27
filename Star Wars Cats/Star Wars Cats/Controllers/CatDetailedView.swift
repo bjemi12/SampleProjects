@@ -5,67 +5,51 @@
 //  Created by Brandon Jemison on 12/19/21.
 //
 
+import SDWebImageSwiftUI
 import SwiftUI
 
 struct CatDetailedView: View {
-    
-    @State var cat: Cat
-    @State var isGrayscaledEnabled: Bool
-    
-    
+    @State var catViewModel: CatViewModel
+   
     var body: some View {
         VStack(spacing: 10) {
-            CatImage(cat: cat, isGrayscaledEnabled: $isGrayscaledEnabled).modifier(ImageModifier(width: 200, height: 200))
-            Text(cat.name)
+            CatImage(cat: catViewModel).modifier(ImageModifier(width: 200, height: 200))
+            Text(catViewModel.cat.name)
             
-            AttributesView(cat: cat)
+            AttributesView(cat: catViewModel)
         }
         .toolbar {
-            ShareButton(cat: cat)
+            ShareButton(cat: catViewModel)
         }
     }
 }
 
 struct CatDetailedView_Previews: PreviewProvider {
-    @State static var cat: Cat = Cat(name: "Whiskers", height: "178", mass: "79", hairColor: "green", skinColor: "brown", eyeColor: "red", birthYear: "unknown", gender: "unknown", image: "")
     @State static var isGrayscaledEnabled: Bool = false
+    @State static var cat: CatViewModel = CatViewModel(cat: Cat(name: "", height: "", mass: "", hairColor: "", skinColor: "", eyeColor: "", birthYear: "", gender: "", image: ""))
     static var previews: some View {
-        CatDetailedView(cat: cat, isGrayscaledEnabled: isGrayscaledEnabled).environmentObject(Network())
+        CatDetailedView(catViewModel: cat)
     }
 }
 
 
 struct CatImage: View {
-    
-    @State var cat: Cat
-    @Binding var isGrayscaledEnabled: Bool
-    @State var grayscaleImage = "https://picsum.photos/200/300?grayscale"
+    @State var cat: CatViewModel
     
     var body: some View {
-        AsyncImage(
-            url: URL(string: (isGrayscaledEnabled ? grayscaleImage : cat.image)),
-            transaction: Transaction(animation: .easeInOut)
-        ) { phase in
-            switch phase {
-            case .empty:
+        WebImage(url: URL(string: cat.image))
+            .resizable()
+            .placeholder {
                 ProgressView()
-            case .success(let image):
-                image
-                    .resizable()
-                    .transition(.scale(scale: 0.1, anchor: .center))
-            case .failure:
-                Image(systemName: "wifi.slash")
-            @unknown default:
-                EmptyView()
             }
-        }
+            .scaledToFit()
+            .modifier(ImageModifier(width: 284, height: 284))
     }
 }
 
 
 struct ShareButton: View {
-    
-    @State var cat: Cat
+    @State var cat: CatViewModel
     
     var body: some View {
         Button(action: shareButton) {
@@ -91,9 +75,7 @@ struct ShareButton: View {
     }
 }
 
-
 struct AttributeRow: View {
-    
     @State var attributeTitle: String?
     @State var attributeName: String
     
@@ -107,20 +89,18 @@ struct AttributeRow: View {
     }
 }
 
-
 struct AttributesView: View {
-    
-    @State var cat: Cat
+    @State var cat: CatViewModel
     
     var body: some View {
         Group {
-            AttributeRow(attributeTitle: "Birth Year: ", attributeName: cat.birthYear ?? "n/a")
-            AttributeRow(attributeTitle: "Mass: ", attributeName: cat.mass ?? "n/a")
-            AttributeRow(attributeTitle: "Height: ", attributeName: cat.height ?? "n/a")
-            AttributeRow(attributeTitle: "Skin Color: ", attributeName: cat.skinColor ?? "n/a")
-            AttributeRow(attributeTitle: "Gender: ", attributeName: cat.gender ?? "n/a")
-            AttributeRow(attributeTitle: "Hair Color: ", attributeName: cat.hairColor ?? "n/a")
-            AttributeRow(attributeTitle: "Eye Color: ", attributeName: cat.eyeColor ?? "n/a")
+            AttributeRow(attributeTitle: "Birth Year: ", attributeName: cat.birthYear )
+            AttributeRow(attributeTitle: "Mass: ", attributeName: cat.mass )
+            AttributeRow(attributeTitle: "Height: ", attributeName: cat.height )
+            AttributeRow(attributeTitle: "Skin Color: ", attributeName: cat.skinColor )
+            AttributeRow(attributeTitle: "Gender: ", attributeName: cat.gender )
+            AttributeRow(attributeTitle: "Hair Color: ", attributeName: cat.hairColor )
+            AttributeRow(attributeTitle: "Eye Color: ", attributeName: cat.eyeColor )
             Divider().background(Color.gray)
             Spacer(minLength: 30)
         }

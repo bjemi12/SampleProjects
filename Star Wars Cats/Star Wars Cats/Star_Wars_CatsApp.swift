@@ -11,7 +11,7 @@ import SwiftUI
 struct Star_Wars_CatsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(Network())
+            ContentView()
         }
     }
 }

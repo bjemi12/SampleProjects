@@ -8,48 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    @EnvironmentObject var network: Network
-    @State var searchText = ""
-    @State var isGrayscaledEnabled: Bool = false
-    
+    @StateObject private var catsListVM = CatsListViewModel()
+
     var body: some View {
         NavigationView {
-            List(catSearchResults.sorted(by: { $0.name < $1.name }), id: \.self) { cat in
+            List(catsListVM.catSearchResults.sorted(by: { $0.name < $1.name }), id: \.name) { cat in
                 HStack {
-                    CatListRow(cat: cat, isGrayscaledEnabled: $isGrayscaledEnabled).modifier(ImageModifier(width: 84, height: 84))
+                    CatListRow(cat: cat).modifier(ImageModifier(width: 84, height: 84))
                     Text(cat.name)
-                    NavigationLink(destination: CatDetailedView(cat: cat, isGrayscaledEnabled: isGrayscaledEnabled)
+                    NavigationLink(destination: CatDetailedView(catViewModel: cat)
                     ) {
                         Text("")
                     }
                 }
             }
             .onAppear {
-                network.getCats()
+                catsListVM.getCats()
             }
             .navigationBarTitle("Star Wars Cats")
-            .navigationBarItems(trailing: Toggle(isGrayscaledEnabled ? "Disable Grascale" : "Enable Grayscale", isOn: $isGrayscaledEnabled))
-            .searchable(text: $searchText)
+            .searchable(text: $catsListVM.searchText)
         }
     }
-    
-    var catSearchResults: [Cat] {
-        if searchText.isEmpty {
-            return network.cats
-        } else {
-            return network.cats.filter { $0.name.contains(searchText) }
-        }
-    }
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environmentObject(Network())
+        ContentView()
     }
 }
-
 
 struct ImageModifier: ViewModifier {
     

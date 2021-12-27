@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Cats: Codable {
-    let results: [Cat]
+struct Results: Codable {
+    var results: [Cat]
 }
 
 struct Cat: Codable, Hashable {
@@ -22,3 +22,6 @@ struct Cat: Codable, Hashable {
     let gender : String?
     let image : String
 }
+
+
+
