@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct CatDetailedView: View {
-    @State var cat: Cat?
+    
+    @State var cat: Cat
     @State var isGrayscaledEnabled: Bool
     
     
     var body: some View {
         VStack(spacing: 10) {
             CatImage(cat: cat, isGrayscaledEnabled: $isGrayscaledEnabled).modifier(ImageModifier(width: 200, height: 200))
-            Text(cat?.name ?? "no name found")
+            Text(cat.name)
             
             AttributesView(cat: cat)
         }
@@ -26,20 +27,23 @@ struct CatDetailedView: View {
 }
 
 struct CatDetailedView_Previews: PreviewProvider {
+    @State static var cat: Cat = Cat(name: "Whiskers", height: "178", mass: "79", hairColor: "green", skinColor: "brown", eyeColor: "red", birthYear: "unknown", gender: "unknown", image: "")
     @State static var isGrayscaledEnabled: Bool = false
     static var previews: some View {
-        CatDetailedView(isGrayscaledEnabled: isGrayscaledEnabled).environmentObject(Network())
+        CatDetailedView(cat: cat, isGrayscaledEnabled: isGrayscaledEnabled).environmentObject(Network())
     }
 }
 
 
 struct CatImage: View {
-    @State var cat: Cat?
+    
+    @State var cat: Cat
     @Binding var isGrayscaledEnabled: Bool
     @State var grayscaleImage = "https://picsum.photos/200/300?grayscale"
+    
     var body: some View {
         AsyncImage(
-            url: URL(string: (isGrayscaledEnabled ? grayscaleImage : cat?.image)!),
+            url: URL(string: (isGrayscaledEnabled ? grayscaleImage : cat.image)),
             transaction: Transaction(animation: .easeInOut)
         ) { phase in
             switch phase {
@@ -61,7 +65,7 @@ struct CatImage: View {
 
 struct ShareButton: View {
     
-    @State var cat: Cat?
+    @State var cat: Cat
     
     var body: some View {
         Button(action: shareButton) {
@@ -71,9 +75,9 @@ struct ShareButton: View {
     
     func shareButton() {
         
-        let url = cat?.image
+        let url = cat.image
         
-        let  imageURL = URL(string: url!)
+        let  imageURL = URL(string: url)
         
         let data = try! Data(contentsOf: imageURL!)
         
@@ -89,8 +93,10 @@ struct ShareButton: View {
 
 
 struct AttributeRow: View {
+    
     @State var attributeTitle: String?
     @State var attributeName: String
+    
     var body: some View {
         Divider().background(Color.gray)
         HStack {
@@ -103,20 +109,21 @@ struct AttributeRow: View {
 
 
 struct AttributesView: View {
-    @State var cat: Cat?
+    
+    @State var cat: Cat
+    
     var body: some View {
         Group {
-            AttributeRow(attributeTitle: "Birth Year: ", attributeName: cat?.birthYear ?? "n/a")
-            AttributeRow(attributeTitle: "Mass: ", attributeName: cat?.mass ?? "n/a")
-            AttributeRow(attributeTitle: "Height: ", attributeName: cat?.height ?? "n/a")
-            AttributeRow(attributeTitle: "Skin Color: ", attributeName: cat?.skinColor ?? "n/a")
-            AttributeRow(attributeTitle: "Gender: ", attributeName: cat?.gender ?? "n/a")
-            AttributeRow(attributeTitle: "Hair Color: ", attributeName: cat?.hairColor ?? "n/a")
-            AttributeRow(attributeTitle: "Eye Color: ", attributeName: cat?.eyeColor ?? "n/a")
+            AttributeRow(attributeTitle: "Birth Year: ", attributeName: cat.birthYear ?? "n/a")
+            AttributeRow(attributeTitle: "Mass: ", attributeName: cat.mass ?? "n/a")
+            AttributeRow(attributeTitle: "Height: ", attributeName: cat.height ?? "n/a")
+            AttributeRow(attributeTitle: "Skin Color: ", attributeName: cat.skinColor ?? "n/a")
+            AttributeRow(attributeTitle: "Gender: ", attributeName: cat.gender ?? "n/a")
+            AttributeRow(attributeTitle: "Hair Color: ", attributeName: cat.hairColor ?? "n/a")
+            AttributeRow(attributeTitle: "Eye Color: ", attributeName: cat.eyeColor ?? "n/a")
             Divider().background(Color.gray)
             Spacer(minLength: 30)
         }
         .font(Font.system(.headline))
-        
     }
 }
