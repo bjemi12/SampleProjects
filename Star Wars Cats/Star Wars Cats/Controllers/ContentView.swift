@@ -12,9 +12,9 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            List(catsListVM.catSearchResults.sorted(by: { $0.name < $1.name }), id: \.name) { cat in
+            List(catsListVM.catSearchResults, id: \.name) { cat in
                 HStack {
-                    CatListRow(cat: cat).modifier(ImageModifier(width: 84, height: 84))
+                    CatListRow(cat: cat)
                     Text(cat.name)
                     NavigationLink(destination: CatDetailedView(catViewModel: cat)
                     ) {

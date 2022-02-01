@@ -14,6 +14,7 @@
 		D42BD5F7276F93B30069E26C /* Cat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42BD5F6276F93B30069E26C /* Cat.swift */; };
 		D42BD5F9276F9A190069E26C /* CatListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42BD5F8276F9A190069E26C /* CatListRow.swift */; };
 		D42BD5FB276FA9C30069E26C /* CatDetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42BD5FA276FA9C30069E26C /* CatDetailedView.swift */; };
+		D42CEDF527A8541A00396D52 /* Kumo in Frameworks */ = {isa = PBXBuildFile; productRef = D42CEDF427A8541A00396D52 /* Kumo */; };
 		D4A4FD562778CB8100B65873 /* CatsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A4FD552778CB8100B65873 /* CatsListViewModel.swift */; };
 		D4A4FD5F27793EB500B65873 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D4A4FD5E27793EB500B65873 /* SDWebImageSwiftUI */; };
 		D4B8204D27768CAB003DCDAA /* CatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B8204C27768CAB003DCDAA /* CatViewModel.swift */; };
@@ -37,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D42CEDF527A8541A00396D52 /* Kumo in Frameworks */,
 				D4A4FD5F27793EB500B65873 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,6 +128,7 @@
 			name = "Star Wars Cats";
 			packageProductDependencies = (
 				D4A4FD5E27793EB500B65873 /* SDWebImageSwiftUI */,
+				D42CEDF427A8541A00396D52 /* Kumo */,
 			);
 			productName = "Star Wars Cats";
 			productReference = D42BD5E3276F918F0069E26C /* Star Wars Cats.app */;
@@ -157,6 +160,7 @@
 			mainGroup = D42BD5DA276F918F0069E26C;
 			packageReferences = (
 				D4A4FD5D27793EB500B65873 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				D42CEDF327A8541A00396D52 /* XCRemoteSwiftPackageReference "Kumo" */,
 			);
 			productRefGroup = D42BD5E4276F918F0069E26C /* Products */;
 			projectDirPath = "";
@@ -395,6 +399,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D42CEDF327A8541A00396D52 /* XCRemoteSwiftPackageReference "Kumo" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DuetHealth/Kumo.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		D4A4FD5D27793EB500B65873 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
@@ -406,6 +418,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D42CEDF427A8541A00396D52 /* Kumo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D42CEDF327A8541A00396D52 /* XCRemoteSwiftPackageReference "Kumo" */;
+			productName = Kumo;
+		};
 		D4A4FD5E27793EB500B65873 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D4A4FD5D27793EB500B65873 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;

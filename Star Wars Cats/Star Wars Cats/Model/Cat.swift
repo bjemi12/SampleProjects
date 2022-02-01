@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Kumo
+import Combine
 
 struct Results: Codable {
     var results: [Cat]
@@ -21,6 +23,14 @@ struct Cat: Codable, Hashable {
     let birthYear : String?
     let gender : String?
     let image : String
+}
+
+class MyService {
+    let service = Service(baseURL: URL(string:"https://duet-public-content.s3.us-east-2.amazonaws.com/"))
+    
+    func Cats() -> AnyPublisher<Results, Error> {
+        self.service.perform(HTTP.Request.get("project.json"))
+    }
 }
 
 

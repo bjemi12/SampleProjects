@@ -15,12 +15,15 @@ struct CatDetailedView: View {
         VStack(spacing: 10) {
             CatImage(cat: catViewModel).modifier(ImageModifier(width: 200, height: 200))
             Text(catViewModel.cat.name)
-            
-            AttributesView(cat: catViewModel)
+            ScrollView {
+                AttributesView(cat: catViewModel)
+            }
+        
         }
         .toolbar {
             ShareButton(cat: catViewModel)
         }
+        
     }
 }
 

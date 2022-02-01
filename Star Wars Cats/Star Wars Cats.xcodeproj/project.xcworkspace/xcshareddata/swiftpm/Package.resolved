@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "Kumo",
+        "repositoryURL": "https://github.com/DuetHealth/Kumo.git",
+        "state": {
+          "branch": null,
+          "revision": "1d7f542096333a259011f833575db9f1ea2565ba",
+          "version": "2.1.0"
+        }
+      },
+      {
         "package": "SDWebImage",
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
         "state": {
