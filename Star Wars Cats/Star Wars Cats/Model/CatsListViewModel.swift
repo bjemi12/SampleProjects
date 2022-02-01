@@ -22,32 +22,38 @@ class CatsListViewModel : ObservableObject{
             return self.cats.filter { $0.name.contains(searchText) }.sorted(by: { $0.name < $1.name })
         }
     }
-   
+    
     func getCats() {
-//        COMBINE
-                guard let url = URL(string: "https://duet-public-content.s3.us-east-2.amazonaws.com/project.json") else { return }
-
-                cancellable = URLSession.shared.dataTaskPublisher(for: url)
-                    .tryMap() { element -> Data in
-                        guard let httpResponse = element.response as? HTTPURLResponse,
-                              httpResponse.statusCode == 200 else {
-                                  throw URLError(.badServerResponse)
-                              }
-                        return element.data
-                    }
-                    .decode(type: Results.self, decoder: JSONDecoder())
-                    .receive(on: DispatchQueue.main)
-                    .sink(receiveCompletion: { print ("Received completion: \($0).") },
-                          receiveValue: { user in print ("Received user: \(user).")
-                        self.cats = user.results.map { CatViewModel(cat: $0) }
-                    })
+        //        COMBINE
+        //                guard let url = URL(string: "https://duet-public-content.s3.us-east-2.amazonaws.com/project.json") else { return }
+        //
+        //                cancellable = URLSession.shared.dataTaskPublisher(for: url)
+        //                    .tryMap() { element -> Data in
+        //                        guard let httpResponse = element.response as? HTTPURLResponse,
+        //                              httpResponse.statusCode == 200 else {
+        //                                  throw URLError(.badServerResponse)
+        //                              }
+        //                        return element.data
+        //                    }
+        //                    .decode(type: Results.self, decoder: JSONDecoder())
+        //                    .receive(on: DispatchQueue.main)
+        //                    .sink(receiveCompletion: { print ("Received completion: \($0).") },
+        //                          receiveValue: { decodedData in
+        //                        self.cats = decodedData.results.map { CatViewModel(cat: $0) }
+        //                    })
         
         //KUMO
-//        cancellable = service.Cats().sink(receiveCompletion: { print ("Received completion: \($0).") },
-//                             receiveValue: { user in
-//                           self.cats = user.results.map { CatViewModel(cat: $0) }
-//                       })
-        }
-        
+        cancellable = service.Cats().sink(receiveCompletion: { completion in
+            switch completion {
+            case .failure(let error):
+                print("Something went wrong \(error)")
+            case .finished:
+                print("completion finished")
+            }
+        }, receiveValue: { decodedData in
+            self.cats = decodedData.results.map { CatViewModel(cat: $0) }
+        })
     }
     
+}
+
